@@ -1,0 +1,173 @@
+\documentclass[a4paper,landscape]{article}
+
+% https://www.overleaf.com/learn/latex/Page_size_and_margins
+\usepackage[landscape]{geometry}
+\usepackage[utf8]{inputenc}
+
+% https://www.overleaf.com/learn/latex/Multiple_columns
+\usepackage{multicol}
+
+\usepackage{color}
+\usepackage{layout}
+\usepackage{geometry}
+\usepackage{amsfonts}
+\usepackage{stmaryrd}
+
+\setlength\parindent{0pt}
+\setlength{\columnseprule}{1pt}
+
+\title{STM32F4 Cheat Sheet}
+\author{Hugues Cassé}
+
+\geometry{
+	a4paper,
+	lmargin=.5in,
+	rmargin=.5in,
+	tmargin=.5in,
+	bmargin=.5in
+}
+
+\newcommand{\simple}[1]{\texttt{$\backslash$#1}}
+\newcommand{\cmd}[1]{\texttt{$\backslash$#1}}
+\newcommand{\cmdarg}[2]{\texttt{$\backslash$#1\{}\textit{#2}\texttt{\}}}
+\newcommand{\dobegin}[1]{\texttt{$\backslash$begin\{#1\}}}
+\newcommand{\doend}[1]{\texttt{$\backslash$end\{#1\}}}
+\newcommand{\tab}{\hspace*{5mm}}
+
+\begin{document}
+
+%\layout
+
+\begin{center}
+	\textbf{\LARGE Latex Beamer Cheat Sheet}	
+\end{center}
+
+\begin{multicols*}{3}
+
+\section*{Document}
+
+\cmd{document}$[$\textit{options}$]$\texttt{\{beamer\}} \\
+\cmd{title}$[$\textit{reduced}$]$\texttt{\{}\textit{title}\texttt{\}} \\
+\cmd{subtitle}$[$\textit{reduced}$]$\texttt{\{}\textit{subtitle}\texttt{\}} \\
+\cmd{author}$[$\textit{reduced}$]$\texttt{\{}\textit{authors}\texttt{\}} \\
+\cmd{institute}$[$\textit{reduced}$]$\texttt{\{}\textit{institute}\texttt{\}} \\
+\cmd{date}$[$\textit{reduced}$]$\texttt{\{}\textit{date}\texttt{\}} \\
+\cmdarg{logo}{...} \\
+\cmdarg{titlegraphic}{...} \\
+
+\dobegin{document} \\
+	\dobegin{frame} \\
+		\tab \cmd{titlepage} \\
+	\doend{frame} \\
+	\tab \textit{frames} \\
+\doend{document}
+
+\medskip
+\textit{Options}: \\
+	\tab \texttt{draft} \\
+	\tab \texttt{handout} -- for impression \\
+	\tab \texttt{envcountsect} -- numbered blocks 
+
+
+\section*{Frames}
+
+\dobegin{frame}[\textit{options}]\texttt{\{}\textit{title}\texttt{\}} \\
+	\tab \cmdarg{frametitle}{\textit{title}} \\
+	\tab \cmdarg{framesubtitle}{\textit{subtitle}} \\
+	\tab ... \\
+\doend{frame}
+
+\medskip
+Options: \\
+\tab \texttt{shrink} to fit text to page \\
+\tab \texttt{fragile} for lstlisting, verbatim \\
+\tab \texttt{allowdisplaybreaks=}$n$ with $n \in \llbracket 0, 4 \rrbracket$ \\
+\tab \texttt{allowframebreaks=}$x$ with $x \in [0, 1]$ \\
+\tab \texttt{b}, \texttt{c}, \texttt{t} -- vertical align \\
+\tab \texttt{noframenumbering} \\
+\tab \texttt{plain} -- no decoration \\
+\tab \texttt{squeeze} -- squeeze vertical space in lists
+
+\section*{Text Decoration}
+
+\cmdarg{alert}{...} \\
+\cmdarg{structure}{...}
+
+\medskip{}
+\dobegin{structureenv} ... \doend{structureenv} \\
+\dobegin{alertenv} ... \doend{alertenv} \\
+
+
+
+\section*{Text Structure}
+
+\dobegin{columns} \\
+	\tab \dobegin{column}\texttt{\{}\textit{size}\texttt{\}} \\
+	\tab \tab ... \\
+	\tab \doend{column} \\
+	\tab ... \\
+\doend{columns}
+
+
+
+
+
+\section*{Blocks}
+
+\textit{block} = \texttt{block}, \texttt{alertblock}, \texttt{exampleblock} \\
+\dobegin{\textit{block}}\texttt{\{}\textit{title}\texttt{\}} \\
+	\tab ... \\
+\doend{\textit{block}}
+
+
+\medskip
+\textit{block} = \texttt{theorem}, \texttt{corollary}, \texttt{fact}, \texttt{lemma}, \texttt{definition}, \texttt{definitions}, \texttt{example}, \texttt{examples}, \texttt{proof} \\
+\dobegin{\textit{block}} \\
+	\tab ... \\
+\doend{\textit{block}}
+
+
+
+\section*{Animation}
+
+\cmd{pause}
+
+
+\medskip
+\dobegin{\textit{list}}$[<+->]$ ... \doend{list} \\
+	\tab item pause \\
+\dobegin{\textit{list}}$[<+-|~alert@+>]$ ... \doend{list} \\
+	\tab item alert \\
+
+\medskip
+\cmd{\textit{command}}$<$\textit{action}$>$ \\
+\cmd{only}$<$\textit{action}$>$\{...\} -- no space \\
+\cmd{uncover}$<$\textit{action}$>$\{...\} -- space visible\\
+\cmd{alt}$<$\textit{action}$>$\{\textit{default}\}\{\textit{alternative}\} \\
+\cmd{temporal}$<$\textit{action}$>$\{\textit{before}\}\{\textit{default}\}\{\textit{after}\} \\
+
+\medskip
+\textit{action}: \\
+	\tab \textit{page}, \textit{page}\texttt{-}\textit{page},  \\
+	\tab \textit{page}\texttt{-}, \texttt{-}\textit{page} \\
+	\tab \textit{action}\texttt{,}\textit{action} \\
+
+\medskip
+\cmd{visible}$<$\textit{action}$>$\{...\} = \cmd{only} \\
+\cmd{invisible}$<$\textit{action}$>$\{...\} = not \cmd{only} \\
+
+\medskip
+\cmd{onslide}$<$\textit{action}$>$\{...\}	=  \cmd{uncover} \\
+\cmd{onslide+}$<$\textit{action}$>$\{...\}	=  \cmd{visible} \\
+\cmd{onslide*}$<$\textit{action}$>$\{...\}	=  \cmd{only}
+
+\medskip
+\dobegin{onlyenv}$<$\textit{action}$>$ ... \doend{onlyenv} \\
+\dobegin{altenv}$<$\textit{action}$>$\{\textit{begin}\}\{\textit{end}\}\{\textit{alt begin}\}\{\textit{alt end}\}...\doend{altenv} \\
+\dobegin{overlayarea}$<$\textit{action}$>$$[$\textit{width}$]$$[$\textit{height}$]$ \\
+	\tab ... \\
+\doend{overlayarea}
+
+\end{multicols*}
+\end{document}
+
