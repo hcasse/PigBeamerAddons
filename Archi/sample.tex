@@ -1,0 +1,211 @@
+\documentclass[handout, 10pt]{beamer}
+\usetheme{Archi}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{lipsum}
+\usepackage{layout}
+
+\title{Archi Theme Multiline}
+\subtitle{PowerPoint Inspired Theme}
+\date[2021]{2021}
+\author{M. Self}
+\institute{There Institute}
+\titlegraphic{\includegraphics[width=20mm]{title.png}}
+
+\newcommand{\toc}{
+	\begin{frame}{Outline}
+		\tableofcontents[currentsection]
+	\end{frame}
+}
+
+\begin{document}
+
+%\begin{frame}
+% \layout
+%\end{frame}
+
+\frame{
+	\maketitle
+}
+
+
+\section{Introduction}
+
+\begin{frame}{A few words}
+	\lipsum[1-1]
+\end{frame}
+
+\begin{frame}{Theme colors}
+	\begin{center}
+		\begin{tikzpicture}
+			\node[myshadow, circle, fill=myorange, minimum width=1.2cm] (myorange) {};
+			\node[below=0mm of myorange] {\footnotesize myorange};
+			\node[myshadow, circle, fill=mydarkorange, minimum width=1.2cm, right=of myorange] (mydarkorange) {};
+			\node[below=0mm of mydarkorange] {\footnotesize mydarkorange};
+			\node[myshadow, circle, fill=myred, minimum width=1.2cm, right=of mydarkorange] (myred) {};
+			\node[below=0mm of myred] {\footnotesize myred};
+			\node[myshadow, circle, fill=mydarkred, minimum width=1.2cm, right=of myred] (mydarkred) {};
+			\node[below=0mm of mydarkred] {\footnotesize mydarkred};
+			\node[myshadow, circle, fill=mypink, minimum width=1.2cm, right=of mydarkred] (mypink) {};
+			\node[below=0mm of mypink] {\footnotesize mypink};
+		\end{tikzpicture}		
+
+		\bigskip
+		\begin{tikzpicture}
+			\node[rectangle, draw, black, myshadow, fill=white, rounded corners] {myshadow tikz style};
+		\end{tikzpicture}
+
+		\bigskip
+		\begin{tikzpicture}
+			\node[myshadow, circle, fill=mybrown, minimum width=1.2cm] (mybrown) {};
+			\node[myshadow, circle, fill=mymate, minimum width=1.2cm, right=of mybrown] (mymate) {};
+			\node[myshadow, circle, fill=myblue, minimum width=1.2cm, right=of mymate] (myblue) {};
+			\node[myshadow, circle, fill=mydarkblue, minimum width=1.2cm, right=of myblue] (mydarkblue) {};			
+			\node[below=0mm of mybrown] {\footnotesize mybrown};
+			\node[below=0mm of mymate] {\footnotesize mymate};
+			\node[below=0mm of myblue] {\footnotesize myblue};
+			\node[below=0mm of mydarkblue] {\footnotesize mydarkblue};
+		\end{tikzpicture}
+	\end{center}
+\end{frame}
+
+
+\section{First Section}
+
+
+\begin{frame}{Itemize and Enumerated}
+	This an itemize list:
+	\begin{itemize}
+		\item item 1
+		\item item 2
+		\item item 3
+	\end{itemize}
+
+	And an enumerate list:
+	\begin{enumerate}
+		\item item a
+		\item item b
+		\item item c
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Several paragraphs}
+	This the first paragraph.
+
+	Followed by another paragraph.
+
+	And then a third one.
+\end{frame}
+
+
+\begin{frame}{Highlighting}
+
+	This text contains an \alert{alert}!
+
+	\begin{alertenv}
+		This is an alert environment!
+	\end{alertenv}
+
+	\begin{structureenv}
+		A structure environment.
+	\end{structureenv}
+
+	And finally a \structure{structure}.
+
+\end{frame}
+
+\begin{frame}{Abstract}
+	\begin{abstract}
+		\lipsum[10-10]
+	\end{abstract}
+\end{frame}
+
+
+\begin{frame}{Verse}
+	\begin{verse}
+		Comme je descendais des Fleuves impassibles, \\
+		Je ne me sentis plus guidé par les haleurs : \\
+		Des Peaux-Rouges criards les avaient pris pour cibles, \\
+		Les ayant cloués nus aux poteaux de couleurs.
+
+		J’étais insoucieux de tous les équipages, \\
+		Porteur de blés flamands ou de cotons anglais. \\
+		Quand avec mes haleurs ont fini ces tapages, \\
+		Les Fleuves m’ont laissé descendre où je voulais.
+	\end{verse}
+\end{frame}
+
+
+\begin{frame}{Quotation}
+	\begin{quotation}
+		\lipsum[20-20]
+	\end{quotation}
+\end{frame}
+
+
+\begin{frame}{Quote}
+	\begin{quote}
+		\lipsum[100-100]
+	\end{quote}
+\end{frame}
+
+
+\section{Third Section}
+
+\begin{frame}{Blocks}
+	\begin{block}{Block Title}
+		Now, the block content.
+	\end{block}
+
+	\begin{alertblock}{Alert Block}
+		This is an alert block!
+	\end{alertblock}
+
+	\begin{exampleblock}{Example Block}
+		And now an example block.
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Proof, theorems, etc}
+	\begin{theorem}
+		$E = M~C^{2}$
+	\end{theorem}
+
+	\begin{lemma}
+		$x \oplus y = y \oplus x$
+	\end{lemma}
+
+	\begin{proof}
+		$A \cup B = (A \setminus B) \cup (B \setminus A) \cup \cap (A \cap B)$
+	\end{proof}
+
+	\begin{corollary}
+		This is a corollary!
+	\end{corollary}
+
+
+\end{frame}
+
+
+\begin{frame}{Definitions, examples, etc}
+
+	\begin{definition}
+		$\forall x, y \in S, x \prec y \equiv x^{2} \le y^{2}$
+	\end{definition}
+
+	\begin{example}
+		$(a + b)^{2} = a^{2} + 2ab + b^{2}$
+	\end{example}
+
+	\begin{fact}
+		This is a fact!
+	\end{fact}
+\end{frame}
+
+\begin{frame}{Very long title... so long... so long ... and so long ... and so long}
+	Very long title test.
+\end{frame}
+
+\end{document}

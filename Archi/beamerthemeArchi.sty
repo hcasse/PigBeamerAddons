@@ -1,0 +1,231 @@
+\mode<presentation>
+
+\RequirePackage{tikz}
+\RequirePackage{xcolor}
+\RequirePackage{changepage}
+\usepackage{calc}
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{shadows}
+\usetikzlibrary{shadows.blur}
+
+
+%%%%%% Used colors %%%%%%
+\definecolor{mylightorange}{RGB}{241,168,99}
+\definecolor{myorange}{RGB}{248,158,70}
+\definecolor{mydarkorange}{RGB}{240,125,80}
+\definecolor{myred}{RGB}{242,90,87}
+\definecolor{mydarkred}{RGB}{226,63,94}
+\definecolor{mypink}{RGB}{227,63,136}
+
+\definecolor{mybrown}{RGB}{174,123,49}
+\definecolor{mymate}{RGB}{255,236,209}
+\definecolor{myblue}{RGB}{70,118,248}
+\definecolor{mydarkblue}{RGB}{49,82,174}
+
+
+%%%%%% Used styles %%%%%%
+\tikzset{myshadow/.style={blur shadow={shadow blur steps=3, shadow xshift=.5mm, shadow yshift=-.5mm}}}
+
+\mode<presentation>
+
+
+%%%%%% global configuration %%%%%%
+\useinnertheme{circles}
+\setbeamersize{text margin left=5mm, text margin right=5mm}
+\def\beamer@size{{size10.clo}}
+
+
+%%% background configuration %%%%%%
+\setbeamertemplate{background}{
+	\begin{tikzpicture}
+	\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+	\fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+	\ifnum\thepage=1\relax%
+		\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+		\fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+		\fill[top color=myorange!50!white, bottom color=myorange] (0, 0) rectangle(.5\paperwidth,\the\paperheight);
+		\node[anchor=south west, nearly transparent] at(-2mm, -2mm) {\includegraphics[viewport=0 0 900 1365, clip, height=\dimexpr\the\paperheight+2mm\relax]{board.png}};
+		\node[anchor=south west] at(.5\textwidth, -2mm) {\includegraphics[viewport=850 0  2048 1365, clip, height=\dimexpr\the\paperheight+2mm\relax]{board.png}};
+	\else
+		\shade[
+			left color=myorange,
+			right color=mydarkorange,
+			shading angle=15,
+			blur shadow={shadow blur steps=5, shadow xshift=0, shadow yshift=-1mm}
+		] (0,\paperheight) rectangle ++(\the\paperwidth,-1.5cm);
+		\fill[myorange, myshadow] (103mm, 4mm) circle(1.5mm);
+		\fill[mydarkorange, myshadow] (108mm, 4mm) circle(1.5mm);
+		\fill[myred, myshadow] (113mm, 4mm) circle(1.5mm);
+		\fill[mydarkred, myshadow] (118mm, 4mm) circle(1.5mm);
+		\fill[mypink, myshadow] (123mm, 4mm) circle(1.5mm);
+	\fi
+	\end{tikzpicture}
+}
+
+
+%%%%%% title page configuration %%%%%%
+\defbeamertemplate*{title page}{}[1][]{%
+	\begin{tikzpicture}
+		\useasboundingbox (0,0) rectangle(.5\paperwidth,\the\paperheight);
+		\node[
+			color=white, fill=myorange,
+			minimum width=.45\textwidth,
+			minimum height=.3\textheight,
+			text width=.4\textwidth,
+			align=center, myshadow,
+			rectangle, ultra thick, draw=white
+		] at(\dimexpr.25\paperwidth - 7mm\relax,.5\paperheight) (title) {
+			\usebeamerfont{title}\baselineskip=20pt\bf\inserttitle\par
+		};
+		\node[color=white, align=center, below=2mm of title] {
+			\footnotesize\bf
+			\usebeamerfont{author}\insertauthor \\
+			\usebeamerfont{author}\insertdate
+		};
+		\node[anchor=south] at(.23\textwidth,2mm) {\inserttitlegraphic};
+	\end{tikzpicture}
+}
+
+
+%%%%%% frame title configuration %%%%%%
+\defbeamertemplate*{frametitle}{}[1][]{
+	\begin{beamercolorbox}[wd=\paperwidth,ht=1.5cm,leftskip=0pt]{frametitle}
+		\begin{tikzpicture}
+			\useasboundingbox(0,0) rectangle(\the\paperwidth,1.5cm);
+			\ifx\insertframesubtitle\@empty%
+				{\node[anchor=west, white,font=\Large\bf, align=left, minimum height=1cm, text width=\dimexpr\paperwidth - 1.5cm\relax] at (.5cm, .75cm){\insertframetitle};}
+			\else%
+				{\node[anchor= west, white, align=left, text width=\dimexpr\paperwidth - 1.5cm\relax] at (.5cm,.75cm){\Large\insertframetitle \\ \small\insertframesubtitle};}%
+			\fi
+		\end{tikzpicture}
+	\end{beamercolorbox}
+}
+
+
+%%%%%% footline configuration %%%%%%
+\setbeamertemplate{footline}{
+	\ifnum\thepage>1\relax%
+		\hspace*{4mm}
+		\usebeamerfont{structure}
+		\begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex]{title in head/foot}%
+			\footnotesize{}
+			{\bf\color{mydarkorange}\insertframenumber/\inserttotalframenumber}
+			\hfill
+			\insertslidenavigationsymbol
+			\insertframenavigationsymbol
+			\insertsubsectionnavigationsymbol
+			\insertsectionnavigationsymbol
+			\insertdocnavigationsymbol
+			\insertbackfindforwardnavigationsymbol{}
+			\hspace*{25mm}
+			\hfill
+			\vspace*{2.5mm}
+		\end{beamercolorbox}
+	\fi
+}
+
+
+
+%%%%%% left sidebar configuration
+
+
+%%%%% right sidebar configuration %%%%%%
+\setbeamertemplate{sidebar canvas right}{}
+
+
+%\usecolortheme{texsx}
+\mode<presentation>
+
+%%%%%% main text configuration %%%%%%
+\setbeamercolor*{title page header}{fg=white}
+\setbeamercolor*{author}{fg=white}
+\setbeamercolor*{date}{fg=white}
+%\setbeamercolor{frametitle}{fg = Ftitle}
+%\setbeamercolor{title}{fg = Ftitle}
+\setbeamercolor{normal text}{fg = black}
+\setbeamercolor{alerted text}{fg = mypink}
+\setbeamercolor{structure}{fg=myblue}
+\setlength{\parskip}{1mm}
+
+
+%%%%%% list configuration %%%%%%
+\setbeamercolor{item}{fg = myorange}
+\setbeamercolor{subitem}{fg = mydarkorange}
+\setbeamercolor{subsubitem}{fg = myred}
+\setbeamercolor{description item}{fg = myred}
+
+
+%%%%%% figure and table configuration %%%%%%
+\setbeamercolor{caption}{fg = black}
+\setbeamercolor{caption name}{fg = black}
+
+
+%%%%%% block configuration %%%%%%
+\setbeamercolor{block title}{fg = white, bg=mybrown}
+\setbeamercolor{block body}{bg = white}
+\setbeamercolor{block title alerted}{bg = mypink, fg=white}
+\setbeamercolor{block body alerted}{bg = white}
+\setbeamercolor{block title example}{fg = white, bg=myblue}
+\setbeamercolor{block body example}{bg = white}
+\setbeamertemplate{blocks}[rounded][shadow=true]  
+
+
+\usefonttheme{professionalfonts}
+%\setbeamerfont{title}{size = \huge}
+%\setbeamerfont{frametitle}{size = \Large}
+
+\setbeamercolor*{section in toc}{fg=mypink}
+\setbeamercolor*{section in toc shaded}{fg=myorange!50!white}
+\setbeamertemplate{section in toc shaded}[default][75]
+%\setbeamertemplate{section in toc}[default][square]
+
+\mode<all>
+
+
+
+
+% configuration
+%\setbeamertemplate{navigation symbols}{}
+
+
+\mode<all>
+
+
+%%%%%% Outline automatic display %%%%%%
+\AtBeginSection{
+	\ifnum\thepage>2\relax%
+			\begin{frame}{Outline}
+				\vspace*{-1.5cm}
+				\begin{center}
+				\begin{minipage}[c][.6\textheight][c]{.6\paperwidth}
+					\tableofcontents[currentsection]
+				\end{minipage}
+				\end{center}
+			\end{frame}
+	\fi
+}
+
+
+
+% good links
+% https://latex-beamer.com/tutorials/text-formatting/
+% http://jeromebelleman.gitlab.io/posts/publishing/beamerthemes/
+% https://www.r-bloggers.com/2011/11/create-your-own-beamer-template/
+% https://newbedev.com/creating-my-own-beamer-theme
+
+% to customize the pages
+%\newcommand{\sectionframe}{{
+%    \setbeamertemplate{background}{
+      % draw the different background
+%    }
+%    \setbeamertemplate{headline}{}
+%    \frame{\sectionpage}
+%}}
+
+
+% passing parameter to theme
+%\newif\if@doMyOption
+%\@doMyOptionfalse
+%\DeclareOption{myoption}{\@doMyOptiontrue}
+%\ProcessOptions
